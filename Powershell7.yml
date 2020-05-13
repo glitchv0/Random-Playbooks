@@ -1,0 +1,21 @@
+---
+- name: Install Powershell 7
+  hosts: localhost
+  gather_facts: false
+  become: yes
+  tasks:
+    - name: Download Powershell 7
+      yum:
+        name: https://github.com/PowerShell/PowerShell/releases/download/v7.0.0/powershell-lts-7.0.0-1.centos.8.x86_64.rpm
+        state: present
+
+    - name: Install Microsoft365 Module
+      shell: pwsh -command  Install-Module -Name Microsoft365DSC -Force
+
+    - name: Microsoft365DSC example
+      win_dsc:
+        resource_name: Microsoft365DSC
+        name: O365Group
+        DisplayName: "Ansible Test"
+        MailNickName: "AnsibleTest"
+        Ensure: present
