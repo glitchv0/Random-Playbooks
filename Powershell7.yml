@@ -1,16 +1,11 @@
 ---
-- name: Install Powershell 7
-  hosts: localhost
+- name: Microsoft365 DSC
+  hosts: "{{ hostname }}"
   gather_facts: false
-  become: yes
   tasks:
-    - name: Download Powershell 7
-      yum:
-        name: https://github.com/PowerShell/PowerShell/releases/download/v7.0.0/powershell-lts-7.0.0-1.centos.8.x86_64.rpm
-        state: present
-
     - name: Install Microsoft365 Module
-      shell: pwsh -command  Install-Module -Name Microsoft365DSC -Force
+      win_shell: Install-Module -Name Microsoft365DSC -Force
+      delegate_to: "{{ hostname }}"
 
     - name: Microsoft365DSC example
       win_dsc:
@@ -19,3 +14,5 @@
         DisplayName: "Ansible Test"
         MailNickName: "AnsibleTest"
         Ensure: present
+      delegate_to: "{{ hostname }}"
+
