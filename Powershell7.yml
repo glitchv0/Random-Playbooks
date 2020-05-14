@@ -18,6 +18,8 @@
         resource_name: O365Group
         DisplayName: "Ansible Test"
         MailNickName: "AnsibleTest"
+        Description: "Ansible Test"
+        ManagedBy: "{{ o365_username }}"
         Ensure: present
         GlobalAdminAccount_password: "{{ o365_password }}"
         GlobalAdminAccount_username: "{{ o365_username }}"
