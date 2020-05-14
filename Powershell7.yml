@@ -8,12 +8,14 @@
       win_shell: Install-PackageProvider -Name NuGet -Force
 
     - name: Install Microsoft365 Module
-      win_shell: Install-Module -Name Microsoft365DSC -Force
+      win_psmodule:
+        name: Microsoft365DSC
+        state: present
+
 
     - name: Microsoft365DSC example
       win_dsc:
-        resource_name: Microsoft365DSC
-        name: O365Group
+        resource_name: O365Group
         DisplayName: "Ansible Test"
         MailNickName: "AnsibleTest"
         Ensure: present
