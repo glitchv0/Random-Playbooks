@@ -19,3 +19,5 @@
         DisplayName: "Ansible Test"
         MailNickName: "AnsibleTest"
         Ensure: present
+        GlobalAdminAccount_password: "{{ o365_password }}"
+        GlobalAdminAccount_username: "{{ o365_username }}"
