@@ -3,9 +3,12 @@
   hosts: "{{ hostname }}"
   gather_facts: false
   tasks:
+
+    - name: Install Nuget update
+      win_shell: Install-PackageProvider -Name NuGet -Force
+
     - name: Install Microsoft365 Module
       win_shell: Install-Module -Name Microsoft365DSC -Force
-    #   delegate_to: "{{ hostname }}"
 
     - name: Microsoft365DSC example
       win_dsc:
@@ -14,5 +17,3 @@
         DisplayName: "Ansible Test"
         MailNickName: "AnsibleTest"
         Ensure: present
-    #   delegate_to: "{{ hostname }}"
-
